@@ -74,17 +74,18 @@ public class Livro {
         return true;
     }
 
-    public void devolver(){
+    public boolean devolver(){
         if(!ativo){
             System.out.println("Livro indisponivel!!!");
-            return;
+            return false;
         }
         if(!emprestado){
             System.out.println("O livro não foi emprestado!!!");
-            return;
+            return false;
         }
         emprestado = false;
         System.out.println("Livro devolvido com sucesso!");
+        return true;
     }
 
     public String getTitulo() {

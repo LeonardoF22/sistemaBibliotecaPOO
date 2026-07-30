@@ -36,6 +36,30 @@ public class Usuario {
         }
     }
 
+    public void devolverLivro(Livro livro){
+        if(!ativo){
+            System.out.println("Usuario desativado!!!");
+            return;
+        }
+        if(quantidadeEmprestimos == 0){
+            System.out.println("Nenhum livro emprestado");
+            return;
+        }
+        if(livro.devolver()){
+            for (int i = 0; i < quantidadeEmprestimos; i++) {
+               if(livrosEmprestados[i] == livro){
+                   for (int j = i; j < quantidadeEmprestimos - 1; j++) {
+                       livrosEmprestados[j] =  livrosEmprestados[j + 1];
+                   }
+                   livrosEmprestados[quantidadeEmprestimos - 1] = null;
+                   quantidadeEmprestimos--;
+                   break;
+               }
+            }
+
+        }
+    }
+
     public void ativarUsuario(){
         if(ativo){
             System.out.println("O usuario ja está ativo!!!");
