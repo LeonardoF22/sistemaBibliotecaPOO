@@ -20,29 +20,76 @@ public class Biblioteca {
         quantidadeDeUsuarios++;
     }
 
-    public void listarLivros(){
+    public boolean haLivrosCadastrados(){
         if(livrosCadastrados[0] == null){
             System.out.println("Nenhum livro cadastrado no sistema!");
+            return false;
+        }
+        return true;
+    }
+
+    public void exibirLivro(int idLivro){
+        if(!haLivrosCadastrados()){
             return;
         }
-        for(Livro livro : livrosCadastrados){
-            if(livro == null){
+        livrosCadastrados[idLivro].exibirLivro();
+    }
+
+    public void listarLivros(){
+        if(!haLivrosCadastrados()){
+            return;
+        }
+        for (int i = 0; i < quantidadeDeLivros; i++) {
+            if(livrosCadastrados[i] == null){
                 return;
             }
-            livro.exibirLivro();
+            System.out.println("ID: " + i);
+            livrosCadastrados[i].exibirLivro();
         }
     }
 
-    public void listarUsuarios(){
-        if(usuariosCadastrados[0] == null){
+
+    public boolean haUsuariosCadastrados(){
+        if(usuariosCadastrados[0] == null) {
             System.out.println("Nenhum usuario cadastrado no sistema!");
+            return false;
+        }
+        return true;
+    }
+
+    public void exibirUsuario(int idUsuario){
+        if(!haUsuariosCadastrados()){
             return;
         }
-        for(Usuario usuario : usuariosCadastrados){
-            if(usuario == null){
+        usuariosCadastrados[idUsuario].exibirInformacoes();
+    }
+
+    public void listarUsuarios(){
+        if(!haUsuariosCadastrados()){
+            return;
+        }
+        for (int i = 0; i < quantidadeDeUsuarios; i++) {
+            if(usuariosCadastrados[i] == null){
                 return;
             }
-            usuario.exibirInformacoes();
+            System.out.println("ID: " + i);
+            usuariosCadastrados[i].exibirInformacoes();
         }
+    }
+
+    public void emprestarLivro(int idUsuario, int idLivro){
+        usuariosCadastrados[idUsuario].emprestarLivro(livrosCadastrados[idLivro]);
+    }
+
+    public void devolverLivro(int idUsuario, int idLivro){
+        usuariosCadastrados[idUsuario].devolverLivro(livrosCadastrados[idLivro]);
+    }
+
+    public int getQuantidadeDeLivros() {
+        return quantidadeDeLivros;
+    }
+
+    public int getQuantidadeDeUsuarios() {
+        return quantidadeDeUsuarios;
     }
 }

@@ -21,19 +21,20 @@ public class Usuario {
         ativo = true;
     }
 
-    public void emprestarLivro(Livro livro){
+    public boolean emprestarLivro(Livro livro){
         if(!ativo){
             System.out.println("Usuario desativado!!!");
-            return;
+            return false;
         }
         if(quantidadeEmprestimos >= 3){
             System.out.println("Quantidade maxima de livros emprestados!!!");
-            return;
+            return false;
         }
         if(livro.emprestar()){
             livrosEmprestados[quantidadeEmprestimos] = livro;
             quantidadeEmprestimos++;
         }
+        return true;
     }
 
     public void devolverLivro(Livro livro){
@@ -89,7 +90,7 @@ public class Usuario {
         System.out.println("Quantidade de emprestimos: " + quantidadeEmprestimos);
         System.out.println("Livros emprestados: ");
         for (int i = 0; i < quantidadeEmprestimos; i++) {
-            System.out.println("    Titulo: " + livrosEmprestados[i].getTitulo());
+            System.out.println("    ID:" + i + " Titulo: " + livrosEmprestados[i].getTitulo());
         }
         System.out.println("Ativo: " + ativo);
     }

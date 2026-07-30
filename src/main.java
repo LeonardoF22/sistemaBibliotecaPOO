@@ -98,6 +98,55 @@ public class main {
         return usuario;
     }
 
+    public static void emprestarLivro(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haUsuariosCadastrados()){
+            return;
+        }
+        if(biblioteca.getQuantidadeDeLivros() == 0){
+            System.out.println("Nenhum livro cadastrado!");
+            return;
+        }
+        biblioteca.listarUsuarios();
+        System.out.println("Qual usuario vai emprestrar um livro: ");
+        int idUsuario = sc.nextInt();
+        while (idUsuario < 0 || idUsuario >= biblioteca.getQuantidadeDeUsuarios()){
+            System.out.println("Usuario invalido! Digite novamente: ");
+            idUsuario = sc.nextInt();
+        }
+        biblioteca.listarLivros();
+        System.out.println("Qual livro o usuario deseja: ");
+        int idLivro = sc.nextInt();
+        while (idLivro < 0 || idLivro >= biblioteca.getQuantidadeDeLivros()){
+            System.out.println("Livro invalido! Digite novamente: ");
+            idLivro = sc.nextInt();
+        }
+
+        biblioteca.emprestarLivro(idUsuario, idLivro);
+    }
+
+    public static void devolverLivro(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haUsuariosCadastrados()){
+            return;
+        }
+        if(biblioteca.getQuantidadeDeLivros() == 0){
+            System.out.println("Nenhum livro cadastrado!");
+            return;
+        }
+        biblioteca.listarUsuarios();
+        System.out.println("Qual usuario vai devolver um livro: ");
+        int idUsuario = sc.nextInt();
+        while (idUsuario < 0 || idUsuario >= biblioteca.getQuantidadeDeUsuarios()){
+            System.out.println("Usuario invalido! Digite novamente: ");
+            idUsuario = sc.nextInt();
+        }
+
+        biblioteca.exibirUsuario(idUsuario);
+        System.out.println("Qual livro o usuario vai devolver: ");
+        int idLivro = sc.nextInt();
+        biblioteca.devolverLivro(idUsuario,idLivro);
+
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Biblioteca biblioteca = new Biblioteca();
@@ -125,8 +174,10 @@ public class main {
                     biblioteca.listarUsuarios();
                     break;
                 case 5:
+                    emprestarLivro(biblioteca, sc);
                     break;
                 case 6:
+                    devolverLivro(biblioteca, sc);
                     break;
                 case 7:
                     break;
