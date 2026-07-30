@@ -29,8 +29,10 @@ public class Livro {
         System.out.println("Título: " + titulo);
         System.out.println("Autor: " + autor);
         System.out.println("Generos: ");
-        for(String genero : generos){
-            System.out.print(genero);
+        if(generos != null) {
+            for (String genero : generos) {
+                System.out.println("    " + genero);
+            }
         }
         System.out.println("Ano de publicação: " + anoPublicacao);
         System.out.println("Paginas: " + paginas);
