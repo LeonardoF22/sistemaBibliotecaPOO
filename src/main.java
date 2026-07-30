@@ -160,30 +160,40 @@ public class main {
                     System.out.println("Encerrando o sistema");
                     break;
                 case 1:
-                    System.out.println("Cadastrando novo livro");
+                    System.out.println("Voce escolheu cadastrar um novo livro");
                     biblioteca.cadastrarLivro(cadastrarLivro(sc));
                     break;
                 case 2:
-                    System.out.println("Cadastrando novo usuario");
+                    System.out.println("Voce escolheu cadastrar um novo usuario");
                     biblioteca.cadastrarUsuario(cadastrarUsuario(sc));
                     break;
                 case 3:
+                    System.out.println("Voce escolheu exibir todos os livros");
                     biblioteca.listarLivros();
                     break;
                 case 4:
+                    System.out.println("Voce escolheu exibir todos os usuarios");
                     biblioteca.listarUsuarios();
                     break;
                 case 5:
+                    System.out.println("Voce escolheu emprestar um livro");
                     emprestarLivro(biblioteca, sc);
                     break;
                 case 6:
+                    System.out.println("Voce escolheu devolver um livro");
                     devolverLivro(biblioteca, sc);
                     break;
                 case 7:
+                    System.out.println("Voce escolheu exibir todos os livros disponiveis");
+                    biblioteca.listarLivrosDisponiveis();
                     break;
                 case 8:
+                    System.out.println("Voce escolheu listar todos os livros emprestados");
+                    biblioteca.listarLivrosEmprestados();
                     break;
                 case 9:
+                    System.out.println("Voce escolheu listar todos os livros desativados");
+                    biblioteca.listarLivrosDesativados();
                     break;
                 case 10:
                     break;
