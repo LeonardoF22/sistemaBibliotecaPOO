@@ -72,6 +72,32 @@ public class main {
         return livro;
     }
 
+    public static Usuario cadastrarUsuario(Scanner sc){
+        System.out.println("Nome: ");
+        String nome = sc.nextLine();
+        while (nome.isEmpty()){
+            System.out.println("Nome invalido digite novamente: ");
+            nome = sc.nextLine();
+        }
+        System.out.println("Idade: ");
+        int idade = sc.nextInt();
+        while (idade < 12){
+            System.out.println("Idade invalida! Digite novamente: ");
+            idade = sc.nextInt();
+        }
+        sc.nextLine();
+        System.out.println("Email: ");
+        String email = sc.nextLine();
+        while (email.isEmpty()){
+            System.out.println("Email invalido! Digite novamente: ");
+            email = sc.nextLine();
+        }
+
+        Usuario usuario = new Usuario(nome, idade, email);
+
+        return usuario;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Biblioteca biblioteca = new Biblioteca();
@@ -89,11 +115,14 @@ public class main {
                     biblioteca.cadastrarLivro(cadastrarLivro(sc));
                     break;
                 case 2:
+                    System.out.println("Cadastrando novo usuario");
+                    biblioteca.cadastrarUsuario(cadastrarUsuario(sc));
                     break;
                 case 3:
                     biblioteca.listarLivros();
                     break;
                 case 4:
+                    biblioteca.listarUsuarios();
                     break;
                 case 5:
                     break;
