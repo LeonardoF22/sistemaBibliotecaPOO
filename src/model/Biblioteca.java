@@ -52,8 +52,10 @@ public class Biblioteca {
         if(!haLivrosCadastrados()){
             return;
         }
+        System.out.println("Livros disponiveis");
         for (int i = 0; i < quantidadeDeLivros; i++) {
             if(livrosCadastrados[i].isAtivo() && !livrosCadastrados[i].isEmprestado()){
+                System.out.println("ID: " + i);
                 livrosCadastrados[i].exibirLivro();
             }
         }
@@ -63,8 +65,10 @@ public class Biblioteca {
         if(!haLivrosCadastrados()){
             return;
         }
+        System.out.println("Livros emprestados");
         for (int i = 0; i < quantidadeDeLivros; i++) {
             if(livrosCadastrados[i].isAtivo() && livrosCadastrados[i].isEmprestado()){
+                System.out.println("ID: " + i);
                 livrosCadastrados[i].exibirLivro();
             }
         }
@@ -74,8 +78,10 @@ public class Biblioteca {
         if(!haLivrosCadastrados()){
             return;
         }
+        System.out.println("Livros desativados");
         for (int i = 0; i < quantidadeDeLivros; i++) {
             if(!livrosCadastrados[i].isAtivo()){
+                System.out.println("ID: " + i);
                 livrosCadastrados[i].exibirLivro();
             }
         }
@@ -109,6 +115,30 @@ public class Biblioteca {
         }
     }
 
+    public void listarUsuariosDesativados() {
+        if(!haUsuariosCadastrados()){
+            return;
+        }
+        for (int i = 0; i < quantidadeDeUsuarios; i++) {
+            if(!usuariosCadastrados[i].isAtivo()){
+                System.out.println("ID: " + i);
+                usuariosCadastrados[i].exibirInformacoes();
+            }
+        }
+    }
+
+    public void listarUsuariosAtivados(){
+        if(!haUsuariosCadastrados()){
+            return;
+        }
+        for (int i = 0; i < quantidadeDeUsuarios; i++) {
+            if(usuariosCadastrados[i].isAtivo()){
+                System.out.println("ID: " + i);
+                usuariosCadastrados[i].exibirInformacoes();
+            }
+        }
+    }
+
     public void emprestarLivro(int idUsuario, int idLivro){
         usuariosCadastrados[idUsuario].emprestarLivro(livrosCadastrados[idLivro]);
     }
@@ -117,6 +147,21 @@ public class Biblioteca {
         usuariosCadastrados[idUsuario].devolverLivro(livrosCadastrados[idLivro]);
     }
 
+    public void ativarLivro(int idLivro){
+        livrosCadastrados[idLivro].ativarLivro();
+    }
+
+    public void desativarLivro(int idLivro){
+        livrosCadastrados[idLivro].desativarLivro();
+    }
+
+    public void ativarUsuario(int idUsuario){
+        usuariosCadastrados[idUsuario].ativarUsuario();
+    }
+
+    public void desativarUsuario(int idUsuario){
+        usuariosCadastrados[idUsuario].desativarUsuario();
+    }
 
 
     public int getQuantidadeDeLivros() {

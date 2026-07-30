@@ -17,7 +17,7 @@ public class main {
         System.out.println("8 - Livros emprestados");
         System.out.println("9 - Livros desativados");
         System.out.println("10 - Ativar livro");
-        System.out.println("11 - Desatovar Livro");
+        System.out.println("11 - Desativar Livro");
         System.out.println("12 - Ativar usuario");
         System.out.println("13 - Desativar usuario");
         System.out.println("0 - Sair");
@@ -28,13 +28,13 @@ public class main {
         System.out.println("Titulo: ");
         String titulo = sc.nextLine();
         while (titulo.isEmpty()){
-            System.out.println("Titulo invalido! Digite novamente: ");
+            System.out.println("Titulo inválido! Digite novamente: ");
             titulo = sc.nextLine();
         }
         System.out.println("Autor: ");
         String autor = sc.nextLine();
         while (autor.isEmpty()){
-            System.out.println("Autor invalido! Digite novamente: ");
+            System.out.println("Autor inválido! Digite novamente: ");
             autor = sc.nextLine();
         }
         System.out.println("Quantos generos deseja cadastrar: ");
@@ -49,7 +49,7 @@ public class main {
             System.out.println("Digite o genero: ");
             String genero = sc.nextLine();
             while (genero.isEmpty()){
-                System.out.println("Genero invalido! Digite novamente: ");
+                System.out.println("Genero inválido! Digite novamente: ");
                 genero = sc.nextLine();
             }
             generos[i] = genero;
@@ -57,18 +57,17 @@ public class main {
         System.out.println("Ano de publicação: ");
         int anoPublicacao = sc.nextInt();
         while (anoPublicacao <= 0){
-            System.out.println("Ano de publicacao invalido! Digite novamente: ");
+            System.out.println("Ano de publicacao inválido! Digite novamente: ");
             anoPublicacao = sc.nextInt();
         }
         System.out.println("Quantidade de paginas: ");
         int quantidadePaginas = sc.nextInt();
         while (quantidadePaginas <= 0){
-            System.out.println("Quantidade de paginas invalida! Digite novamente: ");
+            System.out.println("Quantidade de paginas inválida! Digite novamente: ");
             quantidadePaginas = sc.nextInt();
         }
 
         Livro livro = new Livro(titulo, autor, generos, anoPublicacao, quantidadePaginas);
-
         return livro;
     }
 
@@ -76,25 +75,24 @@ public class main {
         System.out.println("Nome: ");
         String nome = sc.nextLine();
         while (nome.isEmpty()){
-            System.out.println("Nome invalido digite novamente: ");
+            System.out.println("Nome inválido digite novamente: ");
             nome = sc.nextLine();
         }
         System.out.println("Idade: ");
         int idade = sc.nextInt();
         while (idade < 12){
-            System.out.println("Idade invalida! Digite novamente: ");
+            System.out.println("Idade inválida! Digite novamente: ");
             idade = sc.nextInt();
         }
         sc.nextLine();
         System.out.println("Email: ");
         String email = sc.nextLine();
         while (email.isEmpty()){
-            System.out.println("Email invalido! Digite novamente: ");
+            System.out.println("Email inválido! Digite novamente: ");
             email = sc.nextLine();
         }
 
         Usuario usuario = new Usuario(nome, idade, email);
-
         return usuario;
     }
 
@@ -128,10 +126,6 @@ public class main {
         if(!biblioteca.haUsuariosCadastrados()){
             return;
         }
-        if(biblioteca.getQuantidadeDeLivros() == 0){
-            System.out.println("Nenhum livro cadastrado!");
-            return;
-        }
         biblioteca.listarUsuarios();
         System.out.println("Qual usuario vai devolver um livro: ");
         int idUsuario = sc.nextInt();
@@ -147,6 +141,62 @@ public class main {
 
     }
 
+    public static void ativarLivro(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haLivrosCadastrados()){
+            return;
+        }
+        biblioteca.listarLivrosDesativados();
+        System.out.println("Qual livro deseja ativar: ");
+        int idLivro = sc.nextInt();
+        while(idLivro < 0 || idLivro >= biblioteca.getQuantidadeDeLivros()){
+            System.out.println("Livro invalido! Digite novamente: ");
+            idLivro = sc.nextInt();
+        }
+        biblioteca.ativarLivro(idLivro);
+    }
+
+    public static void desativarLivro(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haLivrosCadastrados()){
+            return;
+        }
+        biblioteca.listarLivrosDisponiveis();
+        System.out.println("Qual livro deseja desativar: ");
+        int idLivro = sc.nextInt();
+        while(idLivro < 0 || idLivro >= biblioteca.getQuantidadeDeLivros()){
+            System.out.println("Livro invalido! Digite novamente: ");
+            idLivro = sc.nextInt();
+        }
+        biblioteca.desativarLivro(idLivro);
+    }
+
+    public static void ativarUsuario(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haUsuariosCadastrados()){
+            return;
+        }
+        biblioteca.listarUsuariosDesativados();
+        System.out.println("Qual usuario deseja ativar: ");
+        int idUsuario = sc.nextInt();
+        while (idUsuario < 0 || idUsuario >= biblioteca.getQuantidadeDeUsuarios()){
+            System.out.println("Usuario invalido! Digite novamente: ");
+            idUsuario = sc.nextInt();
+        }
+        biblioteca.ativarUsuario(idUsuario);
+    }
+
+    public static void desativarUsuario(Biblioteca biblioteca, Scanner sc){
+        if(!biblioteca.haUsuariosCadastrados()){
+            return;
+        }
+        biblioteca.listarUsuariosAtivados();
+        System.out.println("Qual usuario deseja desativar: ");
+        int idUsuario = sc.nextInt();
+        while(idUsuario < 0 || idUsuario >= biblioteca.getQuantidadeDeUsuarios()){
+            System.out.println("Usuario invalido! Digite novamente: ");
+            idUsuario = sc.nextInt();
+        }
+        biblioteca.desativarUsuario(idUsuario);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Biblioteca biblioteca = new Biblioteca();
@@ -160,48 +210,43 @@ public class main {
                     System.out.println("Encerrando o sistema");
                     break;
                 case 1:
-                    System.out.println("Voce escolheu cadastrar um novo livro");
                     biblioteca.cadastrarLivro(cadastrarLivro(sc));
                     break;
                 case 2:
-                    System.out.println("Voce escolheu cadastrar um novo usuario");
                     biblioteca.cadastrarUsuario(cadastrarUsuario(sc));
                     break;
                 case 3:
-                    System.out.println("Voce escolheu exibir todos os livros");
                     biblioteca.listarLivros();
                     break;
                 case 4:
-                    System.out.println("Voce escolheu exibir todos os usuarios");
                     biblioteca.listarUsuarios();
                     break;
                 case 5:
-                    System.out.println("Voce escolheu emprestar um livro");
                     emprestarLivro(biblioteca, sc);
                     break;
                 case 6:
-                    System.out.println("Voce escolheu devolver um livro");
                     devolverLivro(biblioteca, sc);
                     break;
                 case 7:
-                    System.out.println("Voce escolheu exibir todos os livros disponiveis");
                     biblioteca.listarLivrosDisponiveis();
                     break;
                 case 8:
-                    System.out.println("Voce escolheu listar todos os livros emprestados");
                     biblioteca.listarLivrosEmprestados();
                     break;
                 case 9:
-                    System.out.println("Voce escolheu listar todos os livros desativados");
                     biblioteca.listarLivrosDesativados();
                     break;
                 case 10:
+                    ativarLivro(biblioteca, sc);
                     break;
                 case 11:
+                    desativarLivro(biblioteca, sc);
                     break;
                 case 12:
+                    ativarUsuario(biblioteca, sc);
                     break;
                 case 13:
+                    desativarUsuario(biblioteca, sc);
                     break;
                 default:
                     System.out.println("Opção invalida!");

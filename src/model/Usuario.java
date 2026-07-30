@@ -94,4 +94,8 @@ public class Usuario {
         }
         System.out.println("Ativo: " + ativo);
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
 }
